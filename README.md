@@ -68,7 +68,6 @@ This enables algorithm implementations to remain independent of the underlying d
 
 ## File Structure
 
-.
 ├── include/        # Header files (interfaces and class definitions)  
 ├── src/            # Implementation files  
 ├── benchmark/      # Benchmark programs and analysis  
