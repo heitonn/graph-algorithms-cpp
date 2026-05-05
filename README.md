@@ -1,6 +1,6 @@
 # C++ Graph Algorithms
 
-A modular C++ implementation of directed graph data structures and graph algorithms, with support for multiple representations and performance benchmarking.
+A modular C++ implementation of directed graph data structures and graph algorithms, with support for multiple representations and runtime benchmarking.
 
 ---
 
@@ -55,45 +55,14 @@ This enables algorithm implementations to remain independent of the underlying d
 ## Implemented Algorithms
 
 ### Tarjan’s Strongly Connected Components (SCC)
-- Linear-time algorithm: **O(V + E)**
 - Depth-first search with lowlink values
 - Identifies strongly connected components in directed graphs
+- Theoretical runtime is `O(V + E)`.
 
 ### Diamond Query
 - Finds node pairs connected through two distinct labeled paths
 - Path traversal based on edge labels
 - Useful for structured graph queries
-
----
-
-## Benchmarking
-
-The project includes tools for comparing performance between graph representations.
-
-### Benchmarks included:
-- SCC computation (Tarjan)
-- Diamond query execution
-
-### Example:
-
-```bash
-./graph-benchmark-scc 1000 3000 scc1000.dat
-```
-
-Benchmarks can be repeated and averaged to compare runtime across implementations.
-
----
-
-## Analysis
-
-A Jupyter notebook is included for analyzing benchmark results:
-
-`benchmark/plot.ipynb`
-
-This allows visualization of:
-- runtime scaling
-- differences between adjacency matrix and incidence list
-- algorithm performance trends
 
 ---
 
@@ -112,19 +81,35 @@ This allows visualization of:
 
 ## Build and Run
 ### Compile
-Run the build using your environment:
-
-**Linux / macOS:**
-```bash
-make
-```
+Build:
 
 **On Windows (MSYS2 / MinGW):**
 ```bash
 mingw32-make
 ```
 
-### Run examples
+**Linux / macOS:**
+```bash
+make
+```
+
+The build produces:
+```bash
+program
+```
+
+### Run demos
+On Linux/macOS replace `mingw32-make` with `make`
+
+```bash
+mingw32-make scc_demo
+mingw32-make diamond_demo
+mingw32-make io_demo
+mingw32-make delete_demo
+```
+
+
+### Usage
 #### Strongly Connected Components
 
 ```bash
@@ -139,6 +124,34 @@ mingw32-make
 ```
 ---
 
+## Benchmarking
+
+The project includes benchmark code for comparing the incidence list and adjacency matrix representations.
+
+Benchmarks are used to compare:
+- Tarjan SCC runtime
+- Diamond query runtime
+- scaling behavior for different graph sizes
+
+
+Benchmarks can be repeated and averaged to compare runtime across implementations.
+
+A Jupyter notebook is included for plotting benchmark results
+
+```bash
+benchmark/plot.ipynb
+```
+
+---
+
+## Documentation
+
+A detailed project report is available in:
+
+docs/report.pdf
+
+--- 
+
 ## Design Highlights
 - Separation of interface and implementation
 - Support for multiple graph representations
@@ -152,32 +165,3 @@ mingw32-make
 - Parallel or optimized implementations
 - Improved benchmarking and visualization
 
----- 
-**OLD**
----
-Compilation:
-Run the program using the provided Makefile:
-    mingw32-make
-
-Demo targets:
-    mingw32-make pro31  (SCC)
-    mingw32-make pro32  (Diamond query)
-    mingw32-make pro22  (file I/O)    
-    mingw32-make pro25  (delete edges and nodes)
-
-Benchmarking:
-
-Graph data is generated using the provided generator programs:
-    g++ -std=c++17 -O2 benchmark/graph-benchmark-scc.cpp -o generate_scc
-    g++ -std=c++17 -O2 benchmark/graph-benchmark-diamond.cpp -o generate_graph
-
-Example usage:
-    ./generate_scc 1000 3000 scc1000.dat
-    ./generate_graph 1000 3 kb1000.dat qy1000.dat
-
-The benchmark program can then be run as:
-    ./benchmark_program scc incidence scc1000.dat 10
-    ./benchmark_program diamond incidence kb1000.dat qy1000.dat 10
-
-Note:
-.dat files are not included in the submission.
